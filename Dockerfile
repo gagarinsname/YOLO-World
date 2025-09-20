@@ -8,6 +8,7 @@ ENV FORCE_CUDA="1"
 ENV MMCV_WITH_OPS=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    python-is-python3 \
     curl \ 
     python3-pip     \
     libgl1-mesa-glx \
@@ -36,5 +37,4 @@ RUN mkdir weights && curl -o weights/$WEIGHT -L https://huggingface.co/wondervic
 RUN mkdir -p data/coco/lvis \
     &&  curl -o data/coco/lvis/${ANNOTATIONS} https://huggingface.co/GLIPModel/GLIP/resolve/main/${ANNOTATIONS}
 
-ENTRYPOINT [ "python", "demo/image_demo.py" ]
-CMD ["configs/pretrain/$MODEL", "weights/$WEIGHT"]
+ENTRYPOINT [ "/bin/bash" ]
