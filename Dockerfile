@@ -10,8 +10,14 @@ ENV LC_ALL="en_US.UTF-8" \
     CMAKE_POLICY_VERSION_MINIMUM=3.5 \
     DISPLAY=:99
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y locales apt-utils \
+    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && update-locale LANG=en_US.UTF-8 \
+    && apt-get install -y --no-install-recommends \
     python-is-python3 \
+    curl \ 
     wget \
     python3-pip     \
     libgl1-mesa-glx \
