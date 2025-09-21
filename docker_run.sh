@@ -1,8 +1,7 @@
 #!/bin/bash
 
 ENTRYPOINT=${ENTRYPOINT:-/bin/bash}
-CONTAINER_NAME=${CONTAINER_NAME:-yoloworld}
-COMPUTE_CAPABILITY=${COMPUTE_CAPABILITY:-$(nvidia-smi --query-gpu=compute_cap --format=noheader,csv | sed s/\\.//)}
+CONTAINER_NAME=${CONTAINER_NAME:-yoloworld10}
 mkdir -p $OUTPUT
 
 # YOLO_DATA is the path to the data directory
@@ -14,7 +13,7 @@ echo "Data directory: $YOLO_DATA"
 echo "Command: $@"
 echo "======================================================================================="
 
-docker run --name $CONTAINER_NAME \
+docker run --name ${CONTAINER_NAME} \
 	--gpus all \
 	--shm-size 24gb \
 	--network host \
@@ -26,4 +25,4 @@ docker run --name $CONTAINER_NAME \
 	-v $OUTPUT:/output \
 	-e HISTFILE=/yoloworld/.docker_bash_history \
 	--workdir /yoloworld \
-	$IMAGE "$@"
+	yoloworld "$@"
