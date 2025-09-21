@@ -12,7 +12,7 @@ ENV LC_ALL="en_US.UTF-8" \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python-is-python3 \
-    curl \ 
+    wget \
     python3-pip     \
     libgl1-mesa-glx \
     libsm6          \
