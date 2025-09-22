@@ -1,4 +1,4 @@
-supervision
 onnx
 onnxruntime
 onnxsim
+supervision==0.19.*
